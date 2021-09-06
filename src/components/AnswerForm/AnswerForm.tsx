@@ -20,6 +20,8 @@ const AnswerForm = ({ onSubmit }: AnswerFormProps) => {
   const handleCallback: EmmitCallbackParam = ({ error, answer }) => {
     if (error) {
       setError(error);
+    } else {
+      setError("");
     }
 
     if (answer) {
