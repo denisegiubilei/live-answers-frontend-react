@@ -3,10 +3,20 @@ import { io, Socket } from "socket.io-client";
 
 import { URL_DATABASE } from "../api/constants";
 
+export enum SocketEvents {
+	USER_ANSWERED = "user_answered",
+	UPDATE_ANSWERS_LIST = "update_answers_list",
+}
+export interface UserAnsweredArgs {
+	text: string;
+}
 interface SocketContextData {
 	socket: Socket;
+	emmitEvent: (
+		event: SocketEvents,
+		params?: UserAnsweredArgs
+	) => void;
 }
-
 interface SocketContextProviderProps {
 	children: ReactNode;
 }
@@ -34,10 +44,15 @@ export function SocketContextProvider({
     };
   }, []);
 
+  const emmitEvent = (event: SocketEvents, params = {}) => {
+    socket?.emit(event, params);
+  };
+
   return (
     <SocketContext.Provider
       value={{
-        socket
+        socket,
+        emmitEvent
       }}
     >
       {children}
