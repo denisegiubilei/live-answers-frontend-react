@@ -15,9 +15,9 @@ const AnswerList = ({ answers }: AnswerListProps) => {
   return (
     <ul>
       {
-        answerList?.map(({ answers_id, answers_text }: AnswerEntity) => (
-          <li key={answers_id}>
-            <span>{answers_text}</span>
+        answerList?.map(({ id, text }: AnswerEntity) => (
+          <li key={id}>
+            <span>{text}</span>
           </li>
         ))
       }
