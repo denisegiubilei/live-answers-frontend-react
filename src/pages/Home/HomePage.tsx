@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { AnswerForm } from "../../components/AnswerForm/AnswerForm";
 import { AnswerList } from "../../components/AnswerList/AnswerList";
 import { Header } from "../../components/Header/Header";
@@ -8,6 +9,10 @@ import styles from "./HomePage.module.scss";
 
 const HomePage = () => {
   const [answers, setAnswers] = useState([] as AnswerEntity[]);
+
+  const handleClickLiveAnswers = () => {
+    window.open(`${window.location.href}answers`, '_blank');
+  };
 
   const handleAnswerSubmit = (answer: AnswerEntity) => {
     setAnswers(previousAnswers => {
@@ -26,6 +31,7 @@ const HomePage = () => {
           <AnswerList answers={answers} />
         </>
       )}
+      <button onClick={handleClickLiveAnswers}>See all answers</button>
     </div>
   );
 };

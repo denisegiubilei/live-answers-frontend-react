@@ -6,4 +6,20 @@
   h2 {
     @extend %secondary-title;
   }
+
+  button {
+    color: $themeWhite;
+    background-color: $themeSecondary;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+
+    margin-top: 10px;
+
+    &:hover {
+      transform: scale(1.01);
+    }
+  }
 }
