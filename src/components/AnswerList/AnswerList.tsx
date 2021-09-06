@@ -1,13 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 
+import { AnswerEntity } from '../../interfaces/Answer';
 import { listAnswers } from '../../api/answer';
-import { SocketContext, SocketListenEvents } from '../../context/SocketContext';
-
-interface AnswerEntity {
-  answers_id: string;
-  answers_text: string;
-  answers_created_at?: Date;
-}
+import { SocketContext, SocketListenEvents, UpdateAnswersArgs } from '../../context/SocketContext';
 
 const AnswerList = () => {
   const { socket, isConnected }= useContext(SocketContext);
@@ -24,12 +19,11 @@ const AnswerList = () => {
     if (isConnected) {
       socket.on(
         SocketListenEvents.UPDATE_ANSWERS_LIST,
-        (args: any) => {
-          console.log(args);
+        ({ answersList }: UpdateAnswersArgs) => {
+          setAnswers(answersList);
         }
       );
     }
-
   }, [socket, isConnected]);
 
   return (

@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 import { URL_DATABASE } from "../api/constants";
+import { AnswerEntity } from "../interfaces/Answer";
 
 export enum SocketListenEvents {
 	UPDATE_ANSWERS_LIST = "update_answers_list",
@@ -13,6 +14,11 @@ export enum SocketEmmitEvents {
 export interface UserAnsweredArgs {
 	text: string;
 }
+
+export interface UpdateAnswersArgs {
+	answersList: AnswerEntity[];
+}
+
 interface SocketContextData {
 	socket: Socket;
 	isConnected: boolean;
