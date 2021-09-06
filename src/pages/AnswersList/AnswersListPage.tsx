@@ -1,5 +1,7 @@
+import { AnswerList } from "../../components/AnswerList/AnswerList";
+
 const AnswersListPage = () => {
-  return <h1>Top aswers</h1>;
+  return <AnswerList />;
 };
 
 export default AnswersListPage;
