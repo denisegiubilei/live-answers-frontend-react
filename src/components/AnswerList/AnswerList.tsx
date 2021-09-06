@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+
 import { listAnswers } from '../../api/answer';
+import { SocketContext, SocketListenEvents } from '../../context/SocketContext';
 
 interface AnswerEntity {
   answers_id: string;
@@ -8,6 +10,8 @@ interface AnswerEntity {
 }
 
 const AnswerList = () => {
+  const { socket, isConnected }= useContext(SocketContext);
+
   const [answers, setAnswers] = useState([] as AnswerEntity[]);
 
   useEffect(() => {
@@ -15,6 +19,18 @@ const AnswerList = () => {
       setAnswers(res);
     });
   }, []);
+
+  useEffect(() => {
+    if (isConnected) {
+      socket.on(
+        SocketListenEvents.UPDATE_ANSWERS_LIST,
+        (args: any) => {
+          console.log(args);
+        }
+      );
+    }
+
+  }, [socket, isConnected]);
 
   return (
     <section>

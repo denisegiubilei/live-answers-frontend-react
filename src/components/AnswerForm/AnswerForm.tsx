@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useState } from 'react';
 
-import { SocketContext, SocketEvents } from '../../context/SocketContext';
+import { SocketContext, SocketEmmitEvents } from '../../context/SocketContext';
 
 const AnswerForm = () => {
   const { emmitEvent } = useContext(SocketContext);
@@ -16,7 +16,7 @@ const AnswerForm = () => {
 
     const text = target.text.value?.trim();
 
-    emmitEvent(SocketEvents.USER_ANSWERED, { text });
+    emmitEvent(SocketEmmitEvents.USER_ANSWERED, { text });
   };
 
   return (
