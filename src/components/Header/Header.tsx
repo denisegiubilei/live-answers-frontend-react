@@ -3,7 +3,7 @@ interface HeaderProps {
 }
 
 const Header = ({ title }: HeaderProps) => (
-  <header >
+  <header>
     <h1>{title}</h1>
   </header>
 );

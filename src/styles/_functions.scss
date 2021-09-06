@@ -1,0 +1,4 @@
+@function toRem($value) {
+	$remValue: ($value / $rem-base) + rem;	
+	@return $remValue;
+}

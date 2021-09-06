@@ -1,0 +1,41 @@
+@mixin media-x-small {
+	@media (min-width: $breakpoint-x-small) {
+		@content;
+	}
+}
+
+@mixin media-small {
+	@media (min-width: $breakpoint-small) {
+		@content;
+	}
+}
+
+@mixin media-medium {
+	@media (min-width: $breakpoint-medium) {
+		@content;
+	}
+}
+
+@mixin media-large {
+	@media (min-width: $breakpoint-large) {
+		@content;
+	}
+}
+
+@mixin media-extra-large {
+	@media (min-width: $breakpoint-extra-large) {
+		@content;
+	}
+}
+
+@mixin media-extra-extra-large {
+	@media (min-width: $breakpoint-extra-extra-large) {
+		@content;
+	}
+}
+
+@mixin desktop-fullhd {
+	@media (min-width: $breakpoint-desktop-fullhd) {
+		@content;
+	}
+}
