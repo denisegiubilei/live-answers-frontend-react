@@ -1,0 +1,5 @@
+@import "../../index.scss";
+
+.HomePage {
+  @extend %flex-collumn-centered;
+}

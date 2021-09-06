@@ -1,0 +1,10 @@
+@import "../../index.scss";
+
+.Header {
+  @extend %flex-collumn-centered;
+
+  h1 {
+    @extend %primary-title;
+    margin: 20px 0;
+  }
+}

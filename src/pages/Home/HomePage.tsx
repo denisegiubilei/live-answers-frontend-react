@@ -4,6 +4,8 @@ import { AnswerList } from "../../components/AnswerList/AnswerList";
 import { Header } from "../../components/Header/Header";
 import { AnswerEntity } from "../../interfaces/Answer";
 
+import styles from "./HomePage.module.scss";
+
 const HomePage = () => {
   const [answers, setAnswers] = useState([] as AnswerEntity[]);
 
@@ -15,11 +17,11 @@ const HomePage = () => {
   };
 
   return (
-    <>
+    <div className={styles.HomePage}>
       <Header title="Is a hot dog a sandwich? Why?" />
       <AnswerForm onSubmit={handleAnswerSubmit} />
       <AnswerList answers={answers} />
-    </>
+    </div>
   );
 };
 

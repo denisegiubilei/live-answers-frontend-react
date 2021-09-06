@@ -7,6 +7,8 @@ import { listAnswers } from "../../api/answer";
 import { AnswerList } from "../../components/AnswerList/AnswerList";
 import { Header } from "../../components/Header/Header";
 
+import styles from './AnswersListPage.module.scss';
+
 const AnswersListPage = () => {
   const { socket, isConnected } = useContext(SocketContext);
 
@@ -30,10 +32,10 @@ const AnswersListPage = () => {
   }, [socket, isConnected]);
 
   return (
-    <>
+    <div className={styles.AnswersListPage}>
       <Header title="Live answers" />
       <AnswerList answers={answers} />
-    </>
+    </div>
   );
 };
 
