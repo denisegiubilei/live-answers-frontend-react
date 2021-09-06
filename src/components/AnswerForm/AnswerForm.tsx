@@ -42,7 +42,7 @@ const AnswerForm = ({ onSubmit }: AnswerFormProps) => {
       setIsLoading(true);
       emmitEvent(SocketEmmitEvents.USER_ANSWERED, { text }, handleCallback);
     } else {
-      setError("Answer cannot be enmpty!");
+      setError("Answer cannot be empty!");
     }
   };
 
