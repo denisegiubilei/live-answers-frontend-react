@@ -2,4 +2,8 @@
 
 .HomePage {
   @extend %flex-collumn-centered;
+
+  h2 {
+    @extend %secondary-title;
+  }
 }

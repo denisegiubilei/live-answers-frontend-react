@@ -1,0 +1,28 @@
+@import "../../index.scss";
+
+.AnswerList {
+  width: calc(100% - 20px);
+  margin: 20px;
+  
+  border: 1px solid $themeLighterAlt;
+  
+  @include media-large() {
+    width: 70%;
+    max-width: 900px;
+  }
+
+  li {
+    @extend %flex-collumn-centered;
+
+    @include media-large() {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    padding: 15px;
+
+    &:nth-child(odd) {
+      background-color: $themeLighterAlt;
+    }
+  }
+}

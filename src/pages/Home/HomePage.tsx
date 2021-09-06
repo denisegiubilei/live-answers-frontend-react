@@ -20,7 +20,12 @@ const HomePage = () => {
     <div className={styles.HomePage}>
       <Header title="Is a hot dog a sandwich? Why?" />
       <AnswerForm onSubmit={handleAnswerSubmit} />
-      <AnswerList answers={answers} />
+      {answers.length > 0 && (
+        <>
+          <h2>My latest answers</h2>
+          <AnswerList answers={answers} />
+        </>
+      )}
     </div>
   );
 };
