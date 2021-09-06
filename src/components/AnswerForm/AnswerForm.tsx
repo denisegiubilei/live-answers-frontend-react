@@ -1,8 +1,10 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 
-import { submitAnswer } from '../../api/answer';
+import { SocketContext, SocketEvents } from '../../context/SocketContext';
 
 const AnswerForm = () => {
+  const { emmitEvent } = useContext(SocketContext);
+
   const [text, setText] = useState("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -14,13 +16,7 @@ const AnswerForm = () => {
 
     const text = target.text.value?.trim();
 
-    submitAnswer(text)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error => {
-        console.log(error.message);
-      }));
+    emmitEvent(SocketEvents.USER_ANSWERED, { text });
   };
 
   return (
