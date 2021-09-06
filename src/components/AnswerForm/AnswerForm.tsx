@@ -1,20 +1,30 @@
 import { FormEvent, useContext, useState } from 'react';
 
 import { SocketContext, SocketEmmitEvents, EmmitCallbackParam } from '../../context/SocketContext';
+import { AnswerEntity } from '../../interfaces/Answer';
+import { ErrorMessage } from './ErrorMessage/ErrorMessage';
 
-const AnswerForm = () => {
+interface AnswerFormProps {
+  onSubmit: (answer: AnswerEntity) => void;
+}
+
+const AnswerForm = ({ onSubmit }: AnswerFormProps) => {
   const { emmitEvent } = useContext(SocketContext);
 
   const [text, setText] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCallback: EmmitCallbackParam = ({ error, answer }) => {
     if (error) {
-      console.log(error);
+      setError(error);
     }
 
     if (answer) {
-      console.log(answer);
+      onSubmit(answer);
     }
+
+    setIsLoading(false);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -26,7 +36,12 @@ const AnswerForm = () => {
 
     const text = target.text.value?.trim();
 
-    emmitEvent(SocketEmmitEvents.USER_ANSWERED, { text }, handleCallback);
+    if (text) {
+      setIsLoading(true);
+      emmitEvent(SocketEmmitEvents.USER_ANSWERED, { text }, handleCallback);
+    } else {
+      setError("Answer cannot be enmpty!");
+    }
   };
 
   return (
@@ -34,9 +49,14 @@ const AnswerForm = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <input type="text" name="text" value={text} onChange={(e) => setText(e.target.value)} />
+          {error && <ErrorMessage message={error} />}
         </div>
         <button type="submit">
-          Submit
+          {isLoading ? (
+            <span>Submiting...</span>
+          ) : (
+            <span>Submit</span>
+          )}
         </button>
       </form>
     </section>
