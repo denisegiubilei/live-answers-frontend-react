@@ -7,8 +7,10 @@ import { AnswerEntity } from "../../interfaces/Answer";
 
 import styles from "./HomePage.module.scss";
 
+const localAnswers = JSON.parse(window.localStorage.getItem("answers") || "[]");
+
 const HomePage = () => {
-  const [answers, setAnswers] = useState([] as AnswerEntity[]);
+  const [answers, setAnswers] = useState([...localAnswers] as AnswerEntity[]);
 
   const handleClickLiveAnswers = () => {
     window.open(`${window.location.href}answers`, '_blank');
@@ -19,6 +21,13 @@ const HomePage = () => {
       previousAnswers.unshift(answer);
       return [...previousAnswers];
     });
+
+    updateLocalStorage(answer);
+  };
+
+  const updateLocalStorage = (answer: AnswerEntity) => {
+    localAnswers.unshift(answer);
+    window.localStorage.setItem("answers", JSON.stringify(localAnswers));
   };
 
   return (
