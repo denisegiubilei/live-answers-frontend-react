@@ -24,6 +24,7 @@ const AnswerForm = ({ onSubmit }: AnswerFormProps) => {
 
     if (answer) {
       onSubmit(answer);
+      setText("");
     }
 
     setIsLoading(false);
