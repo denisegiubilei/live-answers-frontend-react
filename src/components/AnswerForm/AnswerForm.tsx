@@ -4,6 +4,8 @@ import { SocketContext, SocketEmmitEvents, EmmitCallbackParam } from '../../cont
 import { AnswerEntity } from '../../interfaces/Answer';
 import { ErrorMessage } from './ErrorMessage/ErrorMessage';
 
+import styles from './AnswerForm.module.scss';
+
 interface AnswerFormProps {
   onSubmit: (answer: AnswerEntity) => void;
 }
@@ -45,10 +47,10 @@ const AnswerForm = ({ onSubmit }: AnswerFormProps) => {
   };
 
   return (
-    <section>
+    <section className={styles.AnswerForm}>
       <form onSubmit={handleSubmit}>
         <div>
-          <input type="text" name="text" value={text} onChange={(e) => setText(e.target.value)} />
+          <textarea rows={4} name="text" value={text} onChange={(e) => setText(e.target.value)} />
           {error && <ErrorMessage message={error} />}
         </div>
         <button type="submit">

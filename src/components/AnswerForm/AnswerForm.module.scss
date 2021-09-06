@@ -1,0 +1,39 @@
+@import "../../index.scss";
+
+.AnswerForm {
+  padding: 20px;
+  margin: 40px;
+  background: #c8d8e454;
+
+  form {
+    @extend %flex-collumn-centered;
+
+    textarea {
+      padding: 10px;
+      border-radius: 2px;
+      border: 1px solid $themeTertiary;
+      width: 300px;
+
+      @include media-large() {
+        width: 500px;
+      }
+    }
+
+    button {
+      color: $themeWhite;
+      background-color: $themeTertiary;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+
+      margin-top: 10px;
+      width: 100%;
+
+      &:hover {
+        transform: scale(1.01);
+      }
+    }
+  }
+}
