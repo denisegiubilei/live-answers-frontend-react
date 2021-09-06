@@ -19,12 +19,15 @@ export interface UpdateAnswersArgs {
 	answersList: AnswerEntity[];
 }
 
+export type EmmitCallbackParam = ({ error, answer }: { error?: string, answer?: AnswerEntity }) => void;
+
 interface SocketContextData {
 	socket: Socket;
 	isConnected: boolean;
 	emmitEvent: (
 		event: SocketEmmitEvents,
-		params?: UserAnsweredArgs
+		params?: UserAnsweredArgs,
+		callback?: EmmitCallbackParam
 	) => void;
 }
 interface SocketContextProviderProps {
@@ -57,8 +60,8 @@ export function SocketContextProvider({
     };
   }, []);
 
-  const emmitEvent = (event: SocketEmmitEvents, params = {}) => {
-    socket?.emit(event, params);
+  const emmitEvent = (event: SocketEmmitEvents, params = {}, callback?: EmmitCallbackParam) => {
+    socket?.emit(event, params, callback);
   };
 
   return (

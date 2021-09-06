@@ -1,11 +1,21 @@
 import { FormEvent, useContext, useState } from 'react';
 
-import { SocketContext, SocketEmmitEvents } from '../../context/SocketContext';
+import { SocketContext, SocketEmmitEvents, EmmitCallbackParam } from '../../context/SocketContext';
 
 const AnswerForm = () => {
   const { emmitEvent } = useContext(SocketContext);
 
   const [text, setText] = useState("");
+
+  const handleCallback: EmmitCallbackParam = ({ error, answer }) => {
+    if (error) {
+      console.log(error);
+    }
+
+    if (answer) {
+      console.log(answer);
+    }
+  };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,7 +26,7 @@ const AnswerForm = () => {
 
     const text = target.text.value?.trim();
 
-    emmitEvent(SocketEmmitEvents.USER_ANSWERED, { text });
+    emmitEvent(SocketEmmitEvents.USER_ANSWERED, { text }, handleCallback);
   };
 
   return (
