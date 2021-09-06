@@ -8,15 +8,18 @@ import { AnswerList } from "../../components/AnswerList/AnswerList";
 import { Header } from "../../components/Header/Header";
 
 import styles from './AnswersListPage.module.scss';
+import { Loader } from "../../components/Loader/Loader";
 
 const AnswersListPage = () => {
   const { socket, isConnected } = useContext(SocketContext);
 
   const [answers, setAnswers] = useState([] as AnswerEntity[]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     listAnswers().then(res => {
       setAnswers(res);
+      setIsLoading(false);
     });
   }, []);
 
@@ -34,7 +37,10 @@ const AnswersListPage = () => {
   return (
     <div className={styles.AnswersListPage}>
       <Header title="Live answers" />
-      <AnswerList answers={answers} />
+      {isLoading
+        ? <Loader />
+        : <AnswerList answers={answers} />
+      }
     </div>
   );
 };
