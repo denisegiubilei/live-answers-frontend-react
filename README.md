@@ -7,7 +7,6 @@ Check it out: https://live-answers.herokuapp.com/
 -  [React](https://reactjs.org)
 -  [Typescript](https://www.typescriptlang.org/)
 -  [socket.io-client](https://www.npmjs.com/package/socket.io-client)
--  [eslint](https://eslint.org/)
 
 ## :information_source: How To Install
 
