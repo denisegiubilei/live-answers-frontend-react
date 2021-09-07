@@ -1,4 +1,4 @@
-# Live Answers - Backend
+# Live Answers - Frontend
 
 Check it out: https://live-answers.herokuapp.com/
 
