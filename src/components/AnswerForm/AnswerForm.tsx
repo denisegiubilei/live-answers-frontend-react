@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 
 import { SocketContext, SocketEmmitEvents, EmmitCallbackParam } from '../../context/SocketContext';
 import { AnswerEntity } from '../../interfaces/Answer';
@@ -32,18 +32,18 @@ const AnswerForm = ({ onSubmit }: AnswerFormProps) => {
     setIsLoading(false);
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const target = e.target as typeof e.target & {
+    const payload = e.currentTarget.elements as typeof e.currentTarget.elements & {
       text: { value: string };
     };
 
-    const text = target.text.value?.trim();
+    const submitedText = payload.text.value.trim();
 
-    if (text) {
+    if (submitedText) {
       setIsLoading(true);
-      emmitEvent(SocketEmmitEvents.USER_ANSWERED, { text }, handleCallback);
+      emmitEvent(SocketEmmitEvents.USER_ANSWERED, { text: submitedText }, handleCallback);
     } else {
       setError("Answer cannot be empty!");
     }
@@ -53,10 +53,17 @@ const AnswerForm = ({ onSubmit }: AnswerFormProps) => {
     <section className={styles.AnswerForm}>
       <form onSubmit={handleSubmit}>
         <div>
-          <textarea rows={4} name="text" value={text} onChange={(e) => setText(e.target.value)} />
+          <textarea
+            required
+            data-testid="answer-field"
+            inputMode="text"
+            name="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
           {error && <ErrorMessage message={error} />}
         </div>
-        <button type="submit">
+        <button data-testid="submit-button" type="submit">
           {isLoading ? (
             <span>Submiting...</span>
           ) : (

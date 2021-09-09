@@ -4,7 +4,7 @@ interface ErrorMessageProps {
 }
 
 export const ErrorMessage = ({ message }: ErrorMessageProps) => (
-  <p className={styles.ErrorMessage}>
+  <p data-testid="error-message" className={styles.ErrorMessage}>
     {message}
   </p>
 );

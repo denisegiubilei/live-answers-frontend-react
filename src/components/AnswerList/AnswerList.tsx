@@ -15,7 +15,7 @@ const AnswerList = ({ answers }: AnswerListProps) => {
   }, [answers]);
 
   return (
-    <ul className={styles.AnswerList}>
+    <ul data-testid="answers-list" className={styles.AnswerList}>
       {
         answerList?.map(({ id, text }: AnswerEntity) => (
           <li key={id}>
